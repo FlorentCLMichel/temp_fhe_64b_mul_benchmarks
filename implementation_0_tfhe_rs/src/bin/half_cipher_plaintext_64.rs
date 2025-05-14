@@ -1,4 +1,4 @@
-use implementation_0_tfhe_rs::half_cipher_cipher_mul_64;
+use implementation_0_tfhe_rs::half_cipher_plaintext_mul_64;
 use rand::random;
 use std::time::Instant;
 
@@ -8,7 +8,7 @@ use tfhe::prelude::*;
 const NUM_RUNS: usize = 100;
 
 fn main() {
-    println!("Half 64b Cipher/Cipher multiplication test...");
+    println!("Half 64b Cipher/Plaintext multiplication test...");
     
     let config = ConfigBuilder::default().build();
 
@@ -23,9 +23,8 @@ fn main() {
         let clear_b: u64 = random();
 
         let a = FheUint64::encrypt(clear_a, &client_key);
-        let b = FheUint64::encrypt(clear_b, &client_key);
 
-        let result = half_cipher_cipher_mul_64(&a, &b);
+        let result = half_cipher_plaintext_mul_64(&a, clear_b);
         let decrypted_result: u64 = result.decrypt(&client_key);
         let clear_result = clear_a.wrapping_mul(clear_b);
 

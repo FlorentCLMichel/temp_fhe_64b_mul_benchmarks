@@ -9,3 +9,6 @@ rand = { version = "0.9.1" }
 
 [[bin]]
 name = "half_cipher_cipher_64"
+
+[[bin]]
+name = "half_cipher_plaintext_64"
