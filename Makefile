@@ -1,4 +1,4 @@
-.PHONY: clean tests_plaintext
+.PHONY: clean tests_plaintext tests_impl_0
 
 CC := gcc
 PLAINTEXT_IMPL = plaintext_impl
@@ -28,6 +28,9 @@ tests_plaintext: build/half_64b_mul_plaintext_1 build/full_64b_mul_plaintext_1
 	cp -ru ${PLAINTEXT_IMPL}/tests/data ./build/
 	cd build && ./half_64b_mul_plaintext_1
 	cd build && ./full_64b_mul_plaintext_1
+
+tests_impl_0:
+	cd ${IMPL_0} && cargo build --release && ./target/release/${IMPL_0}
 
 clean: 
 	rm -rf build
