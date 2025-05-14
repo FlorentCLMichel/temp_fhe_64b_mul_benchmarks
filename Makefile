@@ -2,6 +2,7 @@
 
 CC := gcc
 PLAINTEXT_IMPL = plaintext_impl
+IMPL_0 = implementation_0_tfhe_rs
 
 build/half_64b_mul_plaintext_1:\
 	${PLAINTEXT_IMPL}/src/include/mul_plaintext.h\
@@ -30,3 +31,5 @@ tests_plaintext: build/half_64b_mul_plaintext_1 build/full_64b_mul_plaintext_1
 
 clean: 
 	rm -rf build
+	cd ${IMPL_0} && cargo clean
+	rm -f ${IMPL_0}/Cargo.lock
