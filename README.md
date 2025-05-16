@@ -52,4 +52,4 @@ The following results were obtained on an Intel(R) Core(TM) i7-9700K CPU @ 3.60G
 |         Benchmark          | Number of multiplications | Runtime (ms) |
 | :------------------------: | :-----------------------: | :----------: |
 | `half_cipher_plaintext_64` |            100            |   158,000    |
-|  `half_cipher_cipher_64`   |            100            |              |
+|  `half_cipher_cipher_64`   |            100            |   590,000    |
