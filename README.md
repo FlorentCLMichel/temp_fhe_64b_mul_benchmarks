@@ -28,7 +28,7 @@ The reference implementation can be found in `implementation_0_tfhe_rs`. It uses
 To build the executables, install the [Rust compiler](https://www.rust-lang.org/) and run:
 
 ```
-cd implementation_0_tfhe_rs && cargo build --release
+cd implementation_0_tfhe_rs && RUSTFLAGS="-Ctarget-cpu=native" cargo build --release
 ```
 
 The benchmarks can then be run using
@@ -51,5 +51,5 @@ The following results were obtained on an Intel(R) Core(TM) i7-9700K CPU @ 3.60G
 
 |         Benchmark          | Number of multiplications | Runtime (ms) |
 | :------------------------: | :-----------------------: | :----------: |
-| `half_cipher_plaintext_64` |            100            |   158,000    |
-|  `half_cipher_cipher_64`   |            100            |   590,000    |
+| `half_cipher_plaintext_64` |            100            |   140,000    |
+|  `half_cipher_cipher_64`   |            100            |   570,000    |
