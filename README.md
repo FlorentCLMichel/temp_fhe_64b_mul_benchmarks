@@ -53,3 +53,4 @@ The following results were obtained on an Intel(R) Core(TM) i7-9700K CPU @ 3.60G
 | :------------------------: | :-----------------------: | :----------: |
 | `half_cipher_plaintext_64` |            100            |   140,000    |
 |  `half_cipher_cipher_64`   |            100            |   570,000    |
+|  `full_cipher_cipher_64`   |            100            |  1,700,000   |
