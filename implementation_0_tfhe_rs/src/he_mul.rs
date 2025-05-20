@@ -1,6 +1,6 @@
 use tfhe::prelude::*;
 use tfhe::FheUint64;
-use std::ops::{ Shr, BitAnd };
+use std::ops::{ Shr, Shl, BitAnd };
 
 pub fn half_cipher_cipher_mul_64(a: &FheUint64, b: &FheUint64) -> FheUint64 
 {
@@ -32,8 +32,8 @@ pub fn full_cipher_cipher_mul_64(a: &FheUint64, b: &FheUint64) -> (FheUint64, Fh
     let (c_m, carry_0) = c_lh.overflowing_add(&c_hl);
 
     // Split `c_m` between low and high bits
-    let c_m_low = c_m.clone().bitand((1u64 << 32) - 1).shr(32u8);
-    let c_m_high = c_m.bitand(((1u64 << 32) - 1) << 32);
+    let c_m_low = c_m.clone().bitand((1u64 << 32) - 1).shl(32u8);
+    let c_m_high = c_m.bitand(((1u64 << 32) - 1) << 32).shr(32u8);
 
     // Low bits
     let (res_low, carry_1) = c_ll.overflowing_add(&c_m_low);
@@ -47,6 +47,7 @@ pub fn full_cipher_cipher_mul_64(a: &FheUint64, b: &FheUint64) -> (FheUint64, Fh
     // Add the second carry
     let res_high = carry_1.if_then_else(&(res_high_1.clone() + 1u64), &res_high_1);
 
+    //(res_low, res_high)
     (res_low, res_high)
 }
 

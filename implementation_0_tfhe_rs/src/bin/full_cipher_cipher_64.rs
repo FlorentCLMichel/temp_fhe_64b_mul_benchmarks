@@ -8,7 +8,7 @@ use tfhe::prelude::*;
 const NUM_RUNS: usize = 100;
 
 fn main() {
-    println!("Half 64b Cipher/Cipher multiplication test...");
+    println!("Full 64b Cipher/Cipher multiplication test...");
     
     let config = ConfigBuilder::default().build();
 
