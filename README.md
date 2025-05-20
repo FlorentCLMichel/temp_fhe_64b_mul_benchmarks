@@ -49,9 +49,9 @@ cd implementation_0_tfhe_rs && ./target/release/half_cipher_plaintext_64
 
 The following results were obtained on an Intel(R) Core(TM) i7-9700K CPU @ 3.60GHz. 
 
-|         Benchmark          | Number of multiplications | Runtime (ms) |
-| :------------------------: | :-----------------------: | :----------: |
-| `half_cipher_plaintext_64` |            100            |   140,000    |
-|  `half_cipher_cipher_64`   |            100            |   570,000    |
-| `full_cipher_plaintext_64` |            100            |   670,000    |
-|  `full_cipher_cipher_64`   |            100            |  1,700,000   |
+|         Benchmark          | Number of multiplications | Runtime (s) |
+| :------------------------: | :-----------------------: | :---------: |
+| `half_cipher_plaintext_64` |            100            |     140     |
+|  `half_cipher_cipher_64`   |            100            |     570     |
+| `full_cipher_plaintext_64` |            100            |     670     |
+|  `full_cipher_cipher_64`   |            100            |    1,450    |

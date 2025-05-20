@@ -5,7 +5,7 @@ use std::time::Instant;
 use tfhe::{ConfigBuilder, generate_keys, set_server_key, FheUint64};
 use tfhe::prelude::*;
 
-const NUM_RUNS: usize = 100;
+const NUM_RUNS: usize = 10;
 
 fn main() {
     println!("Full 64b Cipher/Cipher multiplication test...");
