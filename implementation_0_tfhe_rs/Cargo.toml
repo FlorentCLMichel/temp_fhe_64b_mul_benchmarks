@@ -12,3 +12,9 @@ name = "half_cipher_cipher_64"
 
 [[bin]]
 name = "half_cipher_plaintext_64"
+
+[[bin]]
+name = "full_cipher_cipher_64"
+
+[[bin]]
+name = "full_cipher_plaintext_64"
