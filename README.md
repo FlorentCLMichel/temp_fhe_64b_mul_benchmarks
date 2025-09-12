@@ -6,6 +6,22 @@ This repository contains a reference implementation of encrypted 64-bits multipl
 
 See the [integer multiplication benchmark document](https://docs.google.com/document/d/1HPHmBfDscTtQAiRGlYV3upykSgK_GOkTg-_Sy41SSAQ/edit?usp=sharing) for more information.
 
+## Test harness
+
+The directory `harness` contains a prototype test harness. 
+
+### Generating plaintext input/output data
+
+The script `cleartext_impl` generates input and output data, saved in the directoty `datasets`. 
+
+**Usage:**
+
+```
+python3 ./harness/cleartext_impl.py cleartext_impl.py [-h] [--num_runs NUM_RUNS] [--seed SEED] [--clrtxt CLRTXT] {0,1,2,3}
+```
+
+For instance, running `python3 ./harness/cleartext_impl.py -h` prints a help message detailing the different flags.
+
 ## Structure of the repository
 
 ### Plaintext implementation
@@ -18,7 +34,6 @@ It defines two functions (in `plaintext_impl/src/include/mul_plaintext.h`), for 
 uint64_t half_64b_mul(const uint64_t lhs, const uint64_t rhs);
 uint128_t full_64b_mul(const uint64_t lhs, const uint64_t rhs);
 ```
-
 
 
 ### Reference homomorphic implementation
@@ -42,8 +57,6 @@ and
 ```
 cd implementation_0_tfhe_rs && ./target/release/half_cipher_plaintext_64
 ```
-
-
 
 ## Reference implementation benchmark results
 
