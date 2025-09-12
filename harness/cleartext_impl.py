@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+
+# Copyright (c) 2025 HomomorphicEncryption.org
+# All rights reserved.
+#
+# This software is licensed under the terms of the Apache v2 License.
+# See the LICENSE.md file for details.
+
 """
 Cleartext reference for the half 64-bits multiplication workload.
 For each test case:
@@ -5,6 +13,7 @@ For each test case:
     - Computes the sum between the two 
     - Writes the result to expected.txt for each test case (# datasets/xxx/expected.txt)
 """
+
 import numpy
 import os
 import random

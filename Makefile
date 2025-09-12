@@ -43,3 +43,4 @@ clean:
 	rm -f ${IMPL_0}/Cargo.lock
 	rm -rf datasets
 	rm -rf harness/__pycache__
+	rm -rf io

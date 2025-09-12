@@ -1,3 +1,9 @@
+// Copyright (c) 2025 HomomorphicEncryption.org
+// All rights reserved.
+//
+// This software is licensed under the terms of the Apache v2 License.
+// See the LICENSE.md file for details.
+
 use implementation_0_tfhe_rs::half_cipher_cleartext_mul_64;
 use rand::random;
 use std::time::Instant;
