@@ -73,6 +73,7 @@ def main() -> int:
     # TODO 
 
     print(f"\nAll steps completed for the {instance_name(size)} dataset!")
+    return 0
 
 
 if __name__ == "__main__" :
