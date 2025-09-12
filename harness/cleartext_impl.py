@@ -27,16 +27,14 @@ def main():
     DATASET_RHS_PATH = params.datadir() / f"rhs.txt"
     OUT_PATH = params.datadir() / f"expected.txt"
 
-    # 1) generate and write the inputs if they do not exist
+    # 1) generate and write the inputs
     os.makedirs(params.datadir(), exist_ok=True)
     if seed is not None:
         numpy.random.seed(seed)
-    if not Path(DATASET_LHS_PATH).is_file():
-        lhs = numpy.random.randint(2**64, size=params.size_bound, dtype=numpy.uint64)
-        numpy.savetxt(DATASET_LHS_PATH, lhs, fmt='%d')
-    if not Path(DATASET_RHS_PATH).is_file():
-        rhs = numpy.random.randint(2**64, size=params.size_bound, dtype=numpy.uint64)
-        numpy.savetxt(DATASET_RHS_PATH, rhs, fmt='%d')
+    lhs = numpy.random.randint(2**64, size=params.size_bound, dtype=numpy.uint64)
+    numpy.savetxt(DATASET_LHS_PATH, lhs, fmt='%d')
+    rhs = numpy.random.randint(2**64, size=params.size_bound, dtype=numpy.uint64)
+    numpy.savetxt(DATASET_RHS_PATH, rhs, fmt='%d')
 
     # 2) compute reference result
     result = lhs * rhs

@@ -13,11 +13,16 @@ run_submission.py - run the entire submission process, from build to verify
 import subprocess
 import utils
 from params import instance_name
+from sys import platform
 
-def main():
+def main() -> int:
     """
     Run the entire submission process, from build to verify
     """
+
+    if not platform.startswith('linux'):
+        print(f"It appears you're running on {platform}; only linux is supported")
+        return 1
 
     # 0. Prepare running
     # Get the arguments
@@ -29,6 +34,7 @@ def main():
     utils.ensure_directories(params.rootdir)
 
     # Build the submission if needed
+    print("Build the submission executable...")
     utils.build_submission(params.rootdir/"scripts")
 
     # The harness scripts are in the 'harness' directory,
