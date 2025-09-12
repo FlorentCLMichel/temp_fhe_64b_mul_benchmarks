@@ -10,7 +10,7 @@ See the [integer multiplication benchmark document](https://docs.google.com/docu
 
 The directory `harness` contains a prototype test harness. 
 
-### Generating plaintext input/output data
+### Generating cleartext input/output data
 
 The script `cleartext_impl` generates input and output data, saved in the directoty `datasets`. 
 
@@ -24,11 +24,11 @@ For instance, running `python3 ./harness/cleartext_impl.py -h` prints a help mes
 
 ## Structure of the repository
 
-### Plaintext implementation
+### Cleartext implementation
 
-The directory `plaintext_impl` contains a plaintext implementation of the half and full 64-bits multipliers in C. It does not run any operations on encrypted data, and is only meant to be used to check the correctness of other implementations.
+The directory `cleartext_impl` contains a cleartext implementation of the half and full 64-bits multipliers in C. It does not run any operations on encrypted data, and is only meant to be used to check the correctness of other implementations.
 
-It defines two functions (in `plaintext_impl/src/include/mul_plaintext.h`), for the half and full 64-bits multipliers:
+It defines two functions (in `cleartext_impl/src/include/mul_cleartext.h`), for the half and full 64-bits multipliers:
 
 ```c
 uint64_t half_64b_mul(const uint64_t lhs, const uint64_t rhs);
@@ -49,13 +49,13 @@ cd implementation_0_tfhe_rs && RUSTFLAGS="-Ctarget-cpu=native" cargo build --rel
 The benchmarks can then be run using
 
 ```
-cd implementation_0_tfhe_rs && ./target/release/half_cipher_plaintext_64
+cd implementation_0_tfhe_rs && ./target/release/half_cipher_cleartext_64
 ```
 
 and
 
 ```
-cd implementation_0_tfhe_rs && ./target/release/half_cipher_plaintext_64
+cd implementation_0_tfhe_rs && ./target/release/half_cipher_cleartext_64
 ```
 
 ## Reference implementation benchmark results
@@ -64,7 +64,7 @@ The following results were obtained on an Intel(R) Core(TM) i7-9700K CPU @ 3.60G
 
 |         Benchmark          | Number of multiplications | Runtime (s) |
 | :------------------------: | :-----------------------: | :---------: |
-| `half_cipher_plaintext_64` |            100            |     140     |
+| `half_cipher_cleartext_64` |            100            |     140     |
 |  `half_cipher_cipher_64`   |            100            |     570     |
-| `full_cipher_plaintext_64` |            100            |     670     |
+| `full_cipher_cleartext_64` |            100            |     670     |
 |  `full_cipher_cipher_64`   |            100            |    1,450    |
