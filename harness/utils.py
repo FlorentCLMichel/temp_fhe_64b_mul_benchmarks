@@ -1,6 +1,19 @@
 import argparse
+import subprocess
+from datetime import datetime
 from params import InstanceParams, TOY, LARGE
+from pathlib import Path
 from typing import Tuple
+
+# Global variable to track the last timestamp
+_last_timestamp: datetime = None
+# Global variable to store measured times
+_timestamps = {}
+_timestampsStr = {}
+# Global variable to store measured sizes
+_bandwidth = {}
+
+SUBMISSION_NAME = 'implementation_0_tfhe_rs'
 
 def parse_submission_arguments(workload: str) -> Tuple[int, InstanceParams, int, int, int]:
     """
@@ -26,3 +39,45 @@ def parse_submission_arguments(workload: str) -> Tuple[int, InstanceParams, int,
     # Use params.py to get instance parameters
     params = InstanceParams(size)
     return size, params, seed, num_runs, clrtxt
+
+def ensure_directories(rootdir: Path):
+    """ Check that the current directory has sub-directories
+    'harness', 'scripts', and SUBMISSION_NAME """
+    required_dirs = ['harness', 'scripts', SUBMISSION_NAME]
+    for dir_name in required_dirs:
+        if not (rootdir / dir_name).exists():
+            print(f"Error: Required directory '{dir_name}'",
+                  f"not found in {rootdir}")
+            sys.exit(1)
+
+def build_submission(script_dir: Path):
+    """
+    Build the submission, including pulling dependencies as neeed
+    """
+    subprocess.run([str(script_dir) + "/build_task_" + SUBMISSION_NAME + ".sh"], check=True)
+
+def log_step(step_num: int, step_name: str, start: bool = False):
+    """ 
+    Helper function to print timestamp after each step with second precision 
+    """
+    global _last_timestamp
+    global _timestamps
+    global _timestampsStr
+    now = datetime.now()
+    # Format with milliseconds precision
+    timestamp = now.strftime("%H:%M:%S")
+
+    # Calculate elapsed time if this isn't the first call
+    elapsed_str = ""
+    elapsed_seconds = 0
+    if _last_timestamp is not None:
+        elapsed_seconds = (now - _last_timestamp).total_seconds()
+        elapsed_str = f" (elapsed: {round(elapsed_seconds, 4)}s)"
+
+    # Update the last timestamp for the next call
+    _last_timestamp = now
+
+    if (not start):
+        print(f"{timestamp} [harness] {step_num}: {step_name} completed{elapsed_str}")
+        _timestampsStr[step_name] = f"{round(elapsed_seconds, 4)}s"
+        _timestamps[step_name] = elapsed_seconds
