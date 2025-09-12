@@ -36,3 +36,4 @@ clean:
 	rm -rf build
 	cd ${IMPL_0} && cargo clean
 	rm -f ${IMPL_0}/Cargo.lock
+	rm -rf datasets
