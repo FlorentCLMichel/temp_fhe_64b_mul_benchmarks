@@ -49,13 +49,30 @@ def main() -> int:
     io_dir.mkdir(parents=True)
     utils.log_step(0, "Init", True)
 
-    # 1. Generate the datasets by running the cleartext implementation
+    # 1. Client side: Generate the datasets by running the cleartext implementation
     print("Generate the input and expected data...")
     cmd = ["python3", harness_dir/"cleartext_impl.py", str(size)]
     if seed is not None:
         cmd.extend(["--seed", str(gendata_seed)])
     subprocess.run(cmd, check=True)
     utils.log_step(1, "Dataset generation")
+    
+    # 2. Client side: pre-process the dataset if needed
+    # TODO
+    
+    # 3. Client side: Encode and encrypt the dataset
+    # TODO 
+    
+    # 4. Server side: Run the encrypted processing
+    # TODO 
+   
+    # 5. Client side: Decrypt and check the result
+    # TODO 
+    
+    # 6. Store measurements
+    # TODO 
+
+    print(f"\nAll steps completed for the {instance_name(size)} dataset!")
 
 
 if __name__ == "__main__" :
