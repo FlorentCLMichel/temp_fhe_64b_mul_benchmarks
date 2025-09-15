@@ -26,3 +26,6 @@ name = "run_gen_keys"
 
 [[bin]]
 name = "run_encrypt"
+
+[[bin]]
+name = "run_h_mul"

@@ -17,6 +17,9 @@ TOY = 0
 SMALL = 1
 MEDIUM = 2
 LARGE = 3
+        
+# parameters for sizes: toy, small, medium, large
+SIZE_BOUND = [10, 1000, 100000, 10000000]
 
 def instance_name(size):
     """Return the string name of the instance size."""
@@ -36,10 +39,7 @@ class InstanceParams:
         if size > LARGE:
             raise ValueError("Invalid instance size")
 
-        # parameters for sizes: toy, small, medium, large
-        size_bound = [10, 1000, 100000, 10000000]
-
-        self.size_bound = size_bound[size]
+        self.size_bound = SIZE_BOUND[size]
 
     def get_size(self):
         """Return the instance size."""

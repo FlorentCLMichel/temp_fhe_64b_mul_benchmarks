@@ -12,7 +12,7 @@ run_submission.py - run the entire submission process, from build to verify
 
 import subprocess
 import utils
-from params import instance_name
+from params import instance_name, SIZE_BOUND
 from pathlib import Path
 from sys import platform
 
@@ -67,22 +67,27 @@ def main() -> int:
     utils.log_step(2, "Key generation")
     
     # 3. Client side: Encode and encrypt the dataset
-    cmd = [IMPL_DIR + "/target/release/run_encrypt", instance_name(size)]
+    cmd = [IMPL_DIR + "/target/release/run_encrypt", test]
     subprocess.run(cmd, check=True)
     utils.log_step(3, "Encryption")
     
     # 4. Server side: Run the encrypted processing
-    # TODO 
+    cmd = [IMPL_DIR + "/target/release/run_h_mul", str(SIZE_BOUND[size])]
+    subprocess.run(cmd, check=True)
     utils.log_step(4, "Homomorphic mul")
    
-    # 5. Client side: Decrypt and check the result
+    # 5. Client side: Decrypt
     # TODO 
-    utils.log_step(5, "Decryption + check the results")
+    utils.log_step(5, "Decryption")
     
-    # 6. Store measurements
+    # 6. Client side: Check the results
+    # TODO 
+    utils.log_step(6, "Checking results")
+    
+    # 7. Store measurements
     # TODO 
 
-    print(f"\nAll steps completed for the {instance_name(size)} dataset!")
+    print(f"\nAll steps completed for the {test} dataset!")
     return 0
 
 

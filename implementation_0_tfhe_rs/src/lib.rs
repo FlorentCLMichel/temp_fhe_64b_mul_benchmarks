@@ -5,4 +5,5 @@
 // See the LICENSE.md file for details.
 
 mod he_mul;
+pub mod utils;
 pub use he_mul::*;
