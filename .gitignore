@@ -1,3 +1,7 @@
 build
+datasets
+harness/__pycache__
 implementation_0_tfhe_rs/Cargo.lock
 implementation_0_tfhe_rs/target
+io
+measurements
