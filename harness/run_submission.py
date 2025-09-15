@@ -30,7 +30,7 @@ def main() -> int:
 
     # 0. Prepare running
     # Get the arguments
-    size, params, seed, num_runs, clrtxt = utils.parse_submission_arguments('Run the add-two-values FHE benchmark.')
+    size, params, seed, num_runs, clrtxt = utils.parse_submission_arguments('Run the 64-bits mul FHE benchmark.')
     test = instance_name(size)
     print(f"\n[harness] Running submission for {test} dataset")
 
@@ -40,6 +40,7 @@ def main() -> int:
     # Build the submission if needed
     print("Build the submission executable...")
     utils.build_submission(params.rootdir/"scripts")
+    print("Executable built")
 
     # The harness scripts are in the 'harness' directory,
     # the executables are in the directory implementation_0_tfhe_rs/target/release
@@ -54,7 +55,6 @@ def main() -> int:
     utils.log_step(0, "Init", True)
 
     # 1. Client side: Generate the datasets by running the cleartext implementation
-    print("Generate the input and expected data...")
     cmd = ["python3", harness_dir/"cleartext_impl.py", str(size)]
     if seed is not None:
         cmd.extend(["--seed", str(gendata_seed)])
