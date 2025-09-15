@@ -22,6 +22,14 @@ python3 ./harness/cleartext_impl.py cleartext_impl.py [-h] [--num_runs NUM_RUNS]
 
 For instance, running `python3 ./harness/cleartext_impl.py -h` prints a help message detailing the different flags.
 
+### Running the test harness for implementation 0
+
+The test harness can be run for implementation 0 (using the [TFHE-rs](https://docs.zama.ai/tfhe-rs) library) using
+
+```
+python3 ./harness/run_submission.py {0,1,2,3}
+```
+
 ## Structure of the repository
 
 ### Cleartext implementation
