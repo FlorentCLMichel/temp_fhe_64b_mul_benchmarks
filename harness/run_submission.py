@@ -10,6 +10,7 @@
 run_submission.py - run the entire submission process, from build to verify
 """
 
+import numpy
 import subprocess
 import utils
 from params import instance_name, SIZE_BOUND
@@ -61,8 +62,7 @@ def main() -> int:
     utils.log_step(1, "Dataset generation")
     
     # 2. Client side: Generate the keys
-    Path("temp").mkdir(exist_ok=True)
-    cmd = [IMPL_DIR + "/target/release/run_gen_keys"]
+    cmd = [IMPL_DIR + "/target/release/run_gen_keys", test]
     subprocess.run(cmd, check=True)
     utils.log_step(2, "Key generation")
     
@@ -72,20 +72,25 @@ def main() -> int:
     utils.log_step(3, "Encryption")
     
     # 4. Server side: Run the encrypted processing
-    cmd = [IMPL_DIR + "/target/release/run_h_mul", str(SIZE_BOUND[size])]
+    cmd = [IMPL_DIR + "/target/release/run_h_mul", test, str(SIZE_BOUND[size])]
     subprocess.run(cmd, check=True)
     utils.log_step(4, "Homomorphic mul")
    
     # 5. Client side: Decrypt
-    # TODO 
+    cmd = [IMPL_DIR + "/target/release/run_decrypt", test, str(SIZE_BOUND[size])]
+    subprocess.run(cmd, check=True)
     utils.log_step(5, "Decryption")
     
     # 6. Client side: Check the results
-    # TODO 
+    expected = numpy.loadtxt("datasets/" + test + "/expected.txt")    
+    out = numpy.loadtxt("io/" + test + "/out.txt")    
+    assert (expected == out).all()
     utils.log_step(6, "Checking results")
     
     # 7. Store measurements
-    # TODO 
+    run_path = params.measuredir() / "results.json"
+    run_path.parent.mkdir(parents=True, exist_ok=True)
+    utils.save_run(run_path)
 
     print(f"\nAll steps completed for the {test} dataset!")
     return 0

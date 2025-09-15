@@ -29,3 +29,6 @@ name = "run_encrypt"
 
 [[bin]]
 name = "run_h_mul"
+
+[[bin]]
+name = "run_decrypt"

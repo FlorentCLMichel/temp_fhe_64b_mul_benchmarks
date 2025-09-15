@@ -23,7 +23,7 @@ pub fn read_numbers_from_file(filepath: &Path) -> io::Result<Vec<u64>> {
 }
 
 
-pub fn write_numbers_to_file(filepath: &Path, numbers: &Vec<u64>) -> io::Result<()> {
+pub fn write_numbers_to_file(filepath: &Path, numbers: &[u64]) -> io::Result<()> {
     let mut file = BufWriter::new(fs::File::create(filepath)?);
     
     for number in numbers {

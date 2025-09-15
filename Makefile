@@ -39,8 +39,8 @@ tests_impl_0:
 
 clean: 
 	rm -rf build
-	rm -rf temp
 	rm -rf io
+	rm -rf measurements
 	cd ${IMPL_0} && cargo clean
 	rm -f ${IMPL_0}/Cargo.lock
 	rm -rf datasets
