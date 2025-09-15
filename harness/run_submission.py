@@ -14,10 +14,7 @@ import numpy
 import subprocess
 import utils
 from params import instance_name, SIZE_BOUND
-from pathlib import Path
 from sys import platform
-
-IMPL_DIR = "implementation_0_tfhe_rs"
 
 def main() -> int:
     """
@@ -57,36 +54,36 @@ def main() -> int:
     # 1. Client side: Generate the datasets by running the cleartext implementation
     cmd = ["python3", harness_dir/"cleartext_impl.py", str(size)]
     if seed is not None:
-        cmd.extend(["--seed", str(gendata_seed)])
+        cmd.extend(["--seed", str(seed)])
     subprocess.run(cmd, check=True)
     utils.log_step(1, "Dataset generation")
-    
+
     # 2. Client side: Generate the keys
-    cmd = [IMPL_DIR + "/target/release/run_gen_keys", test]
+    cmd = [exec_dir/"run_gen_keys", test]
     subprocess.run(cmd, check=True)
     utils.log_step(2, "Key generation")
-    
+
     # 3. Client side: Encode and encrypt the dataset
-    cmd = [IMPL_DIR + "/target/release/run_encrypt", test]
+    cmd = [exec_dir/"run_encrypt", test]
     subprocess.run(cmd, check=True)
     utils.log_step(3, "Encryption")
-    
+
     # 4. Server side: Run the encrypted processing
-    cmd = [IMPL_DIR + "/target/release/run_h_mul", test, str(SIZE_BOUND[size])]
+    cmd = [exec_dir/"run_h_mul", test, str(SIZE_BOUND[size])]
     subprocess.run(cmd, check=True)
     utils.log_step(4, "Homomorphic mul")
-   
+
     # 5. Client side: Decrypt
-    cmd = [IMPL_DIR + "/target/release/run_decrypt", test, str(SIZE_BOUND[size])]
+    cmd = [exec_dir/"run_decrypt", test, str(SIZE_BOUND[size])]
     subprocess.run(cmd, check=True)
     utils.log_step(5, "Decryption")
-    
+
     # 6. Client side: Check the results
-    expected = numpy.loadtxt("datasets/" + test + "/expected.txt")    
-    out = numpy.loadtxt("io/" + test + "/out.txt")    
+    expected = numpy.loadtxt("datasets/" + test + "/expected.txt")
+    out = numpy.loadtxt("io/" + test + "/out.txt")
     assert (expected == out).all()
     utils.log_step(6, "Checking results")
-    
+
     # 7. Store measurements
     run_path = params.measuredir() / "results.json"
     run_path.parent.mkdir(parents=True, exist_ok=True)
