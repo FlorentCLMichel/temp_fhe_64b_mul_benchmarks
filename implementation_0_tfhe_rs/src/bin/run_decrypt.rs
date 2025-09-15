@@ -22,9 +22,10 @@ pub fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     let size = args[1].clone();
     let data_size = args[2].parse::<usize>()?;
+    let io_dir = "io/".to_owned() + &size;
 
     // Load the secret key
-    let serialised_data = fs::read(&("io/".to_owned() + &size + "/sk.bin"))?;
+    let serialised_data = fs::read(&(io_dir.clone() + "/sk.bin"))?;
     let lwe_sk: ClientKey = bincode::deserialize(&serialised_data)?;
 
     // Load the output ciphers
@@ -36,7 +37,7 @@ pub fn main() -> Result<(), Box<dyn std::error::Error>> {
     let results = ciphers_out.iter().map(|c| c.decrypt(&lwe_sk)).collect::<Vec<u64>>();
 
     // Write the results
-    write_numbers_to_file(&Path::new(&("io/".to_owned() + &size + "/out.txt")), &results)?;
+    write_numbers_to_file(&Path::new(&(io_dir.clone() + "/out.txt")), &results)?;
 
     Ok(())
 }

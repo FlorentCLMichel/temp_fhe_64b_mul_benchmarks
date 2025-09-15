@@ -15,6 +15,7 @@ pub fn main() -> Result<(), Box<dyn std::error::Error>> {
         std::process::exit(1); 
     }
     let size = args[1].clone();
+    let io_dir = "io/".to_owned() + &size;
     
     // Generate the keys
     let config = ConfigBuilder::default().build();
@@ -22,11 +23,11 @@ pub fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Serialize and save the secret key
     let serialised_data = bincode::serialize(&client_key)?;
-    fs::write("io/".to_owned() + &size + "/sk.bin", &serialised_data)?;
+    fs::write(io_dir.clone() + "/sk.bin", &serialised_data)?;
     
     // Serialize and save the public key
     let serialised_data = bincode::serialize(&server_key)?;
-    fs::write("io/".to_owned() + &size + "/pk.bin", &serialised_data)?;
+    fs::write(io_dir.clone() + "/pk.bin", &serialised_data)?;
 
     Ok(())
 }

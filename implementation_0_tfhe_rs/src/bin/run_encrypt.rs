@@ -20,9 +20,10 @@ pub fn main() -> Result<(), Box<dyn std::error::Error>> {
         std::process::exit(1); 
     }
     let size = args[1].clone();
+    let io_dir = "io/".to_owned() + &size;
 
     // Load the secret key
-    let serialised_data = fs::read("io/".to_owned() + &size + "/sk.bin")?;
+    let serialised_data = fs::read(io_dir.clone() + "/sk.bin")?;
     let lwe_sk: ClientKey = bincode::deserialize(&serialised_data)?;
 
     // Load the input data (LHS and RHS)
@@ -34,7 +35,7 @@ pub fn main() -> Result<(), Box<dyn std::error::Error>> {
  
     // Write the LHS
     for (i, cipher) in lhs_ciphers.enumerate() {
-        fs::write("io/".to_owned() + &size + "/cipher_lhs_" + &i.to_string() + ".bin", &bincode::serialize(&cipher)?)?
+        fs::write(io_dir.clone() + "/cipher_lhs_" + &i.to_string() + ".bin", &bincode::serialize(&cipher)?)?
     }
     
     // Encode and encrypt the RHS
@@ -42,7 +43,7 @@ pub fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Write the RHS
     for (i, cipher) in rhs_ciphers.enumerate() {
-        fs::write("io/".to_owned() + &size + "/cipher_rhs_" + &i.to_string() + ".bin", &bincode::serialize(&cipher)?)?
+        fs::write(io_dir.clone() + "/cipher_rhs_" + &i.to_string() + ".bin", &bincode::serialize(&cipher)?)?
     }
 
     Ok(())
