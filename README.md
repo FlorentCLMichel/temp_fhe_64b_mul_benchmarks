@@ -2,22 +2,22 @@
 
 ## Scope
 
-This repository contains a reference implementation of encrypted 64-bits multiplication for the Homomorphic Encryption benchmarking group. 
+This repository contains a reference implementation of encrypted 64-bits multiplication for the Homomorphic Encryption benchmarking group.
 
 See the [integer multiplication benchmark document](https://docs.google.com/document/d/1HPHmBfDscTtQAiRGlYV3upykSgK_GOkTg-_Sy41SSAQ/edit?usp=sharing) for more information.
 
 ## Test harness
 
-The directory `harness` contains a prototype test harness. 
+The directory `harness` contains a prototype test harness.
 
 ### Generating cleartext input/output data
 
-The script `cleartext_impl` generates input and output data, saved in the directoty `datasets`. 
+The script `cleartext_impl` generates input and output data, saved in the directoty `datasets`.
 
 **Usage:**
 
 ```
-python3 ./harness/cleartext_impl.py cleartext_impl.py [-h] [--num_runs NUM_RUNS] [--seed SEED] [--clrtxt CLRTXT] {0,1,2,3}
+python3 ./harness/cleartext_impl.py [-h] [--num_runs NUM_RUNS] [--seed SEED] [--clrtxt CLRTXT] {0,1,2,3}
 ```
 
 For instance, running `python3 ./harness/cleartext_impl.py -h` prints a help message detailing the different flags.
@@ -68,7 +68,7 @@ cd implementation_0_tfhe_rs && ./target/release/half_cipher_cleartext_64
 
 ## Reference implementation benchmark results
 
-The following results were obtained on an Intel(R) Core(TM) i7-9700K CPU @ 3.60GHz. 
+The following results were obtained on an Intel(R) Core(TM) i7-9700K CPU @ 3.60GHz.
 
 |         Benchmark          | Number of multiplications | Runtime (s) |
 | :------------------------: | :-----------------------: | :---------: |
