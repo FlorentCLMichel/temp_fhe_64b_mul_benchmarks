@@ -39,8 +39,9 @@ tests_impl_0:
 
 clean: 
 	rm -rf build
+	rm -rf temp
+	rm -rf io
 	cd ${IMPL_0} && cargo clean
 	rm -f ${IMPL_0}/Cargo.lock
 	rm -rf datasets
 	rm -rf harness/__pycache__
-	rm -rf io

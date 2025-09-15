@@ -13,7 +13,10 @@ run_submission.py - run the entire submission process, from build to verify
 import subprocess
 import utils
 from params import instance_name
+from pathlib import Path
 from sys import platform
+
+IMPL_DIR = "implementation_0_tfhe_rs"
 
 def main() -> int:
     """
@@ -57,17 +60,24 @@ def main() -> int:
     subprocess.run(cmd, check=True)
     utils.log_step(1, "Dataset generation")
     
-    # 2. Client side: pre-process the dataset if needed
-    # TODO
+    # 2. Client side: Generate the keys
+    Path("temp").mkdir(exist_ok=True)
+    cmd = [IMPL_DIR + "/target/release/run_gen_keys"]
+    subprocess.run(cmd, check=True)
+    utils.log_step(2, "Key generation")
     
     # 3. Client side: Encode and encrypt the dataset
-    # TODO 
+    cmd = [IMPL_DIR + "/target/release/run_encrypt", instance_name(size)]
+    subprocess.run(cmd, check=True)
+    utils.log_step(3, "Encryption")
     
     # 4. Server side: Run the encrypted processing
     # TODO 
+    utils.log_step(4, "Homomorphic mul")
    
     # 5. Client side: Decrypt and check the result
     # TODO 
+    utils.log_step(5, "Decryption + check the results")
     
     # 6. Store measurements
     # TODO 
