@@ -51,7 +51,7 @@ def main() -> int:
     io_dir.mkdir(parents=True)
     utils.log_step(0, "Init", True)
 
-    # 1. Client side: Generate the datasets by running the cleartext implementation
+    # 1. Harness: Generate the datasets by running the cleartext implementation
     cmd = ["python3", harness_dir/"cleartext_impl.py", str(size)]
     if seed is not None:
         cmd.extend(["--seed", str(seed)])
