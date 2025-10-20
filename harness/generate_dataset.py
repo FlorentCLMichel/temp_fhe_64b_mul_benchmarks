@@ -7,11 +7,8 @@
 # See the LICENSE.md file for details.
 
 """
-Cleartext reference for the half 64-bits multiplication workload.
-For each test case:
-    - Reads the dataset and the query
-    - Computes the sum between the two
-    - Writes the result to expected.txt for each test case (# datasets/xxx/expected.txt)
+- Generates dataset i.e. two operands for 64 bit multiplication and saves them in lhs.txt and rhs.txt respectively. 
+- Computes the product between corresponding operands for expected result.
 """
 
 import numpy
