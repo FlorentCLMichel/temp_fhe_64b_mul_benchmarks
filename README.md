@@ -12,15 +12,15 @@ The directory `harness` contains a prototype test harness.
 
 ### Generating cleartext input/output data
 
-The script `cleartext_impl` generates input and output data, saved in the directoty `datasets`.
+The script `generate_dataset` generates input and output data, saved in the directoty `datasets`.
 
 **Usage:**
 
 ```
-python3 ./harness/cleartext_impl.py [-h] [--num_runs NUM_RUNS] [--seed SEED] [--clrtxt CLRTXT] {0,1,2,3}
+python3 ./harness/generate_dataset.py [-h] [--num_runs NUM_RUNS] [--seed SEED] [--clrtxt CLRTXT] {0,1,2,3}
 ```
 
-For instance, running `python3 ./harness/cleartext_impl.py -h` prints a help message detailing the different flags.
+For instance, running `python3 ./harness/generate_dataset.py -h` prints a help message detailing the different flags.
 
 ### Running the test harness for implementation 0
 

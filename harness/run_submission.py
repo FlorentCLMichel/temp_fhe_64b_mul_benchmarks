@@ -52,7 +52,7 @@ def main() -> int:
     utils.log_step(0, "Init", True)
 
     # 1. Harness: Generate the datasets by running the cleartext implementation
-    cmd = ["python3", harness_dir/"cleartext_impl.py", str(size)]
+    cmd = ["python3", harness_dir/"generate_dataset.py", str(size)]
     if seed is not None:
         cmd.extend(["--seed", str(seed)])
     subprocess.run(cmd, check=True)
