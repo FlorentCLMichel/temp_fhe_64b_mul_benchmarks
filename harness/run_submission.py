@@ -51,10 +51,12 @@ def main() -> int:
     io_dir.mkdir(parents=True)
     utils.log_step(0, "Init", True)
 
-    # 1. Harness: Generate the datasets by running the cleartext implementation
+    # 1. Harness: Generate the datasets
     cmd = ["python3", harness_dir/"generate_dataset.py", str(size)]
     if seed is not None:
         cmd.extend(["--seed", str(seed)])
+    if clrtxt is not None:
+        cmd.extend(["--clrtxt", str(clrtxt)])
     subprocess.run(cmd, check=True)
     utils.log_step(1, "Dataset generation")
 
@@ -79,10 +81,11 @@ def main() -> int:
     utils.log_step(5, "Decryption")
 
     # 6. Client side: Check the results
-    expected = numpy.loadtxt("datasets/" + test + "/expected.txt")
-    out = numpy.loadtxt("io/" + test + "/out.txt")
-    assert (expected == out).all()
-    utils.log_step(6, "Checking results")
+    if clrtxt:
+        expected = numpy.loadtxt("datasets/" + test + "/expected.txt")
+        out = numpy.loadtxt("io/" + test + "/out.txt")
+        assert (expected == out).all()
+        utils.log_step(6, "Checking results")
 
     # 7. Store measurements
     run_path = params.measuredir() / "results.json"
