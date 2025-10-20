@@ -64,7 +64,7 @@ def main() -> int:
     utils.log_step(2, "Key generation")
 
     # 3. Client side: Encode and encrypt the dataset
-    cmd = [exec_dir/"run_encrypt", test]
+    cmd = [exec_dir/"encode_encrypt", test]
     subprocess.run(cmd, check=True)
     utils.log_step(3, "Encryption")
 
@@ -74,7 +74,7 @@ def main() -> int:
     utils.log_step(4, "Homomorphic mul")
 
     # 5. Client side: Decrypt
-    cmd = [exec_dir/"run_decrypt", test, str(SIZE_BOUND[size])]
+    cmd = [exec_dir/"decrypt_decode", test, str(SIZE_BOUND[size])]
     subprocess.run(cmd, check=True)
     utils.log_step(5, "Decryption")
 

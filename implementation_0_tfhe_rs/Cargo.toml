@@ -25,10 +25,10 @@ name = "full_cipher_cleartext_64"
 name = "run_gen_keys"
 
 [[bin]]
-name = "run_encrypt"
+name = "encode_encrypt"
 
 [[bin]]
 name = "run_h_mul"
 
 [[bin]]
-name = "run_decrypt"
+name = "decrypt_decode"
