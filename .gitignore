@@ -5,3 +5,4 @@ implementation_0_tfhe_rs/Cargo.lock
 implementation_0_tfhe_rs/target
 io
 measurements
+cleartext_impl/tests/data
