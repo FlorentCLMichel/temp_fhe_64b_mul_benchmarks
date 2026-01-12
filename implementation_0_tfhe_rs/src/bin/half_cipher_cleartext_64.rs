@@ -1,4 +1,10 @@
-use implementation_0_tfhe_rs::half_cipher_plaintext_mul_64;
+// Copyright (c) 2025 HomomorphicEncryption.org
+// All rights reserved.
+//
+// This software is licensed under the terms of the Apache v2 License.
+// See the LICENSE.md file for details.
+
+use implementation_0_tfhe_rs::half_cipher_cleartext_mul_64;
 use rand::random;
 use std::time::Instant;
 
@@ -8,7 +14,7 @@ use tfhe::prelude::*;
 const NUM_RUNS: usize = 100;
 
 fn main() {
-    println!("Half 64b Cipher/Plaintext multiplication test...");
+    println!("Half 64b Cipher/Cleartext multiplication test...");
     
     let config = ConfigBuilder::default().build();
 
@@ -24,7 +30,7 @@ fn main() {
 
         let a = FheUint64::encrypt(clear_a, &client_key);
 
-        let result = half_cipher_plaintext_mul_64(&a, clear_b);
+        let result = half_cipher_cleartext_mul_64(&a, clear_b);
         let decrypted_result: u64 = result.decrypt(&client_key);
         let clear_result = clear_a.wrapping_mul(clear_b);
 

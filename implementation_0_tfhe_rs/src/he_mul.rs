@@ -1,3 +1,9 @@
+// Copyright (c) 2025 HomomorphicEncryption.org
+// All rights reserved.
+//
+// This software is licensed under the terms of the Apache v2 License.
+// See the LICENSE.md file for details.
+
 use tfhe::prelude::*;
 use tfhe::FheUint64;
 use std::ops::{ Shr, Shl, BitAnd };
@@ -7,7 +13,7 @@ pub fn half_cipher_cipher_mul_64(a: &FheUint64, b: &FheUint64) -> FheUint64
     a * b
 }
 
-pub fn half_cipher_plaintext_mul_64(a: &FheUint64, b: u64) -> FheUint64 
+pub fn half_cipher_cleartext_mul_64(a: &FheUint64, b: u64) -> FheUint64 
 {
     a * b
 }
@@ -51,7 +57,7 @@ pub fn full_cipher_cipher_mul_64(a: &FheUint64, b: &FheUint64) -> (FheUint64, Fh
     (res_low, res_high)
 }
 
-pub fn full_cipher_plaintext_mul_64(a: &FheUint64, b: u64) -> (FheUint64, FheUint64)
+pub fn full_cipher_cleartext_mul_64(a: &FheUint64, b: u64) -> (FheUint64, FheUint64)
 {
     // Split `a` between low and high bits
     let a_low = a.bitand((1u64 << 32) - 1);
